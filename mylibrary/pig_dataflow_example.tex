@@ -1,0 +1,43 @@
+\documentclass{minimal}
+\usepackage{tikz}
+
+\begin{document}
+
+%\begin{tikzpicture}[scale=0.5, every node/.style={scale=0.5}]
+\begin{tikzpicture}[auto]
+
+\tikzstyle{block} = [rectangle, draw=blue, thick, fill=blue!20, text width=5em, text centered, rounded corners]
+\tikzstyle{line} = [draw, thick, shorten >=2pt];
+
+\matrix [column sep=2mm, row sep=2mm]
+{
+% Row 1
+\node [block] (load_users) {Load users}; &
+&
+\node [block] (load_pages) {Load pages}; & \\
+% Row 2
+\node [block] (filter_by_age) {Filter by age}; & & \\
+% Row 3
+ & \node [block] (join_on_name) {Join on name}; & \\
+% Row 4
+ & \node [block] (group_on_url) {Group on URL}; & \\
+% Row 5
+ & \node [block] (count_clicks) {Count clicks}; & \\
+% Row 6
+ & \node [block] (order_by_clicks) {Order by clicks}; & \\
+% Row 7
+ & \node [block] (take_top_5) {Take top 5}; & \\
+};
+
+\tikzstyle{every path}=[line,->]
+\path (load_users) -- (filter_by_age);
+\path (filter_by_age) |- (join_on_name);
+\path (load_pages) |- (join_on_name);
+\path (join_on_name) -- (group_on_url);
+\path (group_on_url) -- (count_clicks);
+\path (count_clicks) -- (order_by_clicks);
+\path (order_by_clicks) -- (take_top_5);
+
+\end{tikzpicture}
+
+\end{document}

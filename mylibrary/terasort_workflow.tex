@@ -1,0 +1,29 @@
+\documentclass{minimal}
+\usepackage{tikz}
+
+\begin{document}
+
+%\begin{tikzpicture}[scale=0.5, every node/.style={scale=0.5}]
+\begin{tikzpicture}[auto]
+
+\tikzstyle{command} = [rectangle, draw=blue, thick, fill=blue!20, text centered, rounded corners]
+\tikzstyle{output} = [rectangle, draw=brown, thick, fill=brown!20, text centered]
+\tikzstyle{line} = [draw, thick, shorten >=2pt];
+
+\node [command] (TeraGen) {TeraGen};
+\node [output, below of=TeraGen] (TeraGenOutput) {\verb!/user/bart/terasort-input!};
+\node [command, below of=TeraGenOutput] (TeraSort) {TeraSort};
+\node [output, below of=TeraSort] (TeraSortOutput) {\verb!/user/bart/terasort-output!};
+\node [command, below of=TeraSortOutput] (TeraValidate) {TeraValidate};
+\node [output, below of=TeraValidate] (TeraValidateOutput) {\verb!/user/bart/terasort-validate!};
+
+\tikzstyle{every path}=[line,->]
+\path (TeraGen) -- (TeraGenOutput);
+\path (TeraGenOutput) -- (TeraSort);
+\path (TeraSort) -- (TeraSortOutput);
+\path (TeraSortOutput) -- (TeraValidate);
+\path (TeraValidate) -- (TeraValidateOutput);
+
+\end{tikzpicture}
+
+\end{document}

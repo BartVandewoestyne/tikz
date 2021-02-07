@@ -1,0 +1,42 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+
+\begin{document}
+\pagestyle{empty}
+
+\tikzstyle{block} = [rectangle, draw, fill=blue!20,
+    text width=6em, text centered, rounded corners, minimum height=4em]
+\tikzstyle{decision} = [diamond, draw, fill=blue!20,
+    text width=6em, text badly centered, node distance=3cm, inner sep=0pt]
+\tikzstyle{line} = [draw, -latex']
+
+\begin{tikzpicture}[node distance = 2cm, auto]
+  % Place nodes
+  \node [block] (rdbms) {RDBMS vs. Distributed Processing};
+
+  \node [decision, right of=rdbms] (choice) {Technology Choice};
+
+  \node [block, right of=choice, node distance=3cm] (mapreduce) {MapReduce \& Alternatives};
+  \node [block, above of=mapreduce] (stack) {Big Data Stack Analysis};
+
+  \node [block, below of=mapreduce] (bi) {BI Optimization};
+  \node [block, below of=rdbms] (optimization) {Distributed Processing Optimization};
+
+  \node [block, below of=choice, node distance=10em] (infrastructure) {Infrastruture \& Cloud Analysis};
+  \node [block, below of=infrastructure] (dissemination) {Dissemination};
+
+  % Draw edges
+  \path [line] (rdbms) -- (choice);
+  \path [line] (stack) -- (mapreduce);
+  \path [line] (mapreduce) -- (choice);
+  \path [line] (choice) -- (bi);
+  \path [line] (choice) -- (optimization);
+
+  \path [line] (optimization) -- (infrastructure);
+  \path [line] (bi) -- (infrastructure);
+  \path [line] (infrastructure) -- (dissemination);
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,14 @@
+\documentclass{article}
+
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}
+  \fill (1,1) circle (2pt) node[above] (O) {Start};
+  \draw (O) -- (2,2);   % absolute
+  \draw (O) --++ (3,2); % relative
+  \node[left=2cm] at (O) {Left}; % relative
+\end{tikzpicture}
+
+\end{document}
